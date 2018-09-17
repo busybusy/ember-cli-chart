@@ -93,6 +93,15 @@ export default Component.extend({
 	 */
 	options: null,
 
+  /**
+	 * Chart js plugins object.
+	 *
+	 * @public
+	 * @property plugins
+	 * @type object
+	 */
+	plugins: null,
+	
 	/**
 	 * Options object for setting options on
 	 * a specific chart type.
@@ -212,12 +221,14 @@ export default Component.extend({
 
 		const context = this.$().find('canvas').get(0),
 					type    = this.get('type'),
-					options = this.setDefaultOptions(this.get('options'));
+					options = this.setDefaultOptions(this.get('options')),
+					plugins = this.get('plugins') || {};
 
 		const chart = new Chart(context, {
 			type: camelize(type),
 			data: _chartObject,
-			options: options
+			options: options,
+			plugins: plugins
 		});
 
 		// add the chart to the chartObject if
